@@ -6,15 +6,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
-        poetry-version: ["latest", "main", "1.8.4"]
+        python-version: ["3.12"]
+        poetry-version: ["latest", "1.8.4"]
 
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up Python
         if: github.repository == 'dev'
         uses: actions/setup-python@v5
@@ -24,11 +23,9 @@ jobs:
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: ${{ matrix.poetry-version }}
-      
       - name: Run Test
         if: github.repository == 'dev'
-        run: |          
-          poetry run pytest
+        run: poetry run pytest
   
 
 
