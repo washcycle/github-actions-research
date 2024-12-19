@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print GitHub ref
+        run: |
+          echo "GitHub ref: ${{ github.ref }}"
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up Python
