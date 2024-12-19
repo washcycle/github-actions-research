@@ -21,9 +21,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run image
-      uses: abatilo/actions-poetry@v2
-      with:
-        poetry-version: ${{ matrix.poetry-version }}
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      
+      - name: Run Test
+        if: github.repository == 'dev'
+        run: |          
+          poetry run pytest
   
 
 
