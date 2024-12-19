@@ -12,13 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print GitHub ref
-        run: |
-          echo "GitHub ref: ${{ github.ref }}"
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up Python
-        if: github.ref == 'refs/heads/dev'
+        if: github.event.pull_request.head.ref == 'dev'
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
@@ -27,7 +24,7 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Run Test
-        if: github.ref == 'refs/heads/dev'
+        if: github.event.pull_request.head.ref == 'dev'
         run: poetry run pytest
   
 
