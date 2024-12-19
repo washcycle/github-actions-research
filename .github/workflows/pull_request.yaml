@@ -24,7 +24,7 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Run Test
-        if: github.repository == 'dev'
+        if: github.ref == 'refs/heads/dev'
         run: poetry run pytest
   
 
